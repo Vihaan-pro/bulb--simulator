@@ -1,0 +1,46 @@
+
+import pygame
+
+# Initialize Pygame
+pygame.init()
+
+# Set up display
+screen_width, screen_height = 400,400
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("Bulb Simulator")
+
+# Load bulb images (make sure you have two images for the bulb: one on and one off)
+on_bulb = pygame.image.load('on_bulb.png')
+bulb_off = pygame.image.load('bulb_off.png')
+
+# Scale images if needed
+on_bulb = pygame.transform.scale(on_bulb, (200, 300))
+bulb_off = pygame.transform.scale(bulb_off, (200, 300))
+
+# Set up the bulb state (True means on, False means off)
+bulb_state = False
+
+# Main loop
+running = True
+while running:
+    screen.fill((255, 255, 255))  # Fill screen with white
+    
+    # Check events
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.KEYDOWN or event.type == pygame.MOUSEBUTTONDOWN:
+            # Toggle the bulb state keypress or mouse click
+            bulb_state = not bulb_state
+
+    # Display the appropriate image based on bulb state
+    if bulb_state:
+        screen.blit(on_bulb, (100, 50))  # Bulb on
+    else:
+        screen.blit(bulb_off, (100, 50))  # Bulb off
+
+    # Update the display
+    pygame.display.update()
+
+# Quit Pygame
+pygame.quit()
